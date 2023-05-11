@@ -43,7 +43,6 @@ def click_image_center(img, loc, x, y):
     h, w = img.shape[::-1][:2]
     center_x = loc[0] + w // 2
     center_y = loc[1] + h // 2
-    print (center_x, center_y)
     pyautogui.moveTo(x + center_x, y + center_y, duration=.1)
     pyautogui.click(clicks=1, interval=1)
 
