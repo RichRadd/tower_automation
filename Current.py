@@ -9,7 +9,6 @@ retry_game_image = cv2.imread('images/retry_game.png')
 buy_health_image = cv2.imread('images/health_upgrade.png')
 ad_gem_image = cv2.imread('images/ad_gem.png')
 start_game_image = cv2.imread('images/start_game.png')
-float_gem_image = cv2.imread('images/float_gem.png')
 threshold = 0.85
 
 # find the Bluestacks window
