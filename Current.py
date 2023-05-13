@@ -34,10 +34,10 @@ def main_cycle(x, y, w, h):
     ad_gem_min_val, ad_gem_max_val, ad_gem_min_loc, ad_gem_max_loc = cv2.minMaxLoc(ad_gem_result)
     start_game_min_val, start_game_max_val, start_game_min_loc, start_game_max_loc = cv2.minMaxLoc(start_game_result)
 
-    start_game(start_game_max_val, start_game_max_loc, x, y)
     retry(retry_max_val, retry_max_loc, x, y)
     buy_health(buy_health_max_val, buy_health_max_loc, x, y)
     click_ad(ad_gem_max_val, ad_gem_max_loc, x, y)
+    start_game(start_game_max_val, start_game_max_loc, x, y)
 
 def click_image_center(img, loc, x, y):
     h, w = img.shape[::-1][:2]
