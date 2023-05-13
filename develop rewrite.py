@@ -67,4 +67,4 @@ def main_cycle(x, y, w, h):
 # Run the main loop
 while True:
     main_cycle(x, y, w, h)
-    time.sleep(3)
+    time.sleep(10)
