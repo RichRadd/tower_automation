@@ -49,7 +49,7 @@ def perform_action(x, y, action_name, result_max_val, result_max_loc):
     
     if action_name == 'claim1' or action_name == 'tor_claim' or action_name == 'tor_end' or action_name == 'tor_next':
         click_image_center(target_images[action_name], result_max_loc, x, y)
-        print("__*** Non Regular button Pressed ***__ \n" * 5)
+        print("__*** Non regular button pressed ***__ \n" * 5)
         return
 
     click_image_center(target_images[action_name], result_max_loc, x, y)
