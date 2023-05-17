@@ -13,7 +13,9 @@ image_files = {
     'claim1': 'images/claim1.png',
     'tor_claim': 'images/tor_claim.png',
     'tor_end': 'images/tor_end.png',
-    'tor_next': 'images/tor_next.png'
+    'tor_next': 'images/tor_next.png',
+    'claim3': 'images/claim3.png',   
+    'claim2': 'images/claim2.png'
 }
 threshold = 0.85
 
@@ -38,6 +40,12 @@ def perform_action(x, y, action_name, result_max_val, result_max_loc):
     if result_max_val < threshold:
         return
     
+    if action_name == 'claim1' or action_name == 'tor_claim' or action_name == 'tor_end' or action_name == 'tor_next'or action_name == 'claim2':
+        click_image_center(target_images[action_name], result_max_loc, x, y)
+        print("__*** Non regular button pressed ***__ \n" * 1)
+        print(action_name)
+        return
+
     if action_name == 'buy_health':
         click_image_center(target_images[action_name], result_max_loc, x+130, y)
         return
@@ -45,11 +53,6 @@ def perform_action(x, y, action_name, result_max_val, result_max_loc):
     if action_name == 'retry_game' or action_name == 'start_game':
         click_image_center(target_images[action_name], result_max_loc, x, y)
         click_defence_icon(x, y)
-        return
-    
-    if action_name == 'claim1' or action_name == 'tor_claim' or action_name == 'tor_end' or action_name == 'tor_next':
-        click_image_center(target_images[action_name], result_max_loc, x, y)
-        print("__*** Non regular button pressed ***__ \n" * 5)
         return
 
     click_image_center(target_images[action_name], result_max_loc, x, y)
