@@ -42,8 +42,8 @@ def perform_action(x, y, action_name, result_max_val, result_max_loc):
     
     if action_name == 'claim1' or action_name == 'tor_claim' or action_name == 'tor_end' or action_name == 'tor_next'or action_name == 'claim2':
         click_image_center(target_images[action_name], result_max_loc, x, y)
-        print("__*** Non regular button pressed ***__ \n" * 1)
-        print(action_name)
+        print("__*** Non regular button pressed ***__" * 1)
+        print(action_name, "\n")
         return
 
     if action_name == 'buy_health':
@@ -81,4 +81,4 @@ def main_cycle():
 # Run the main loop
 while True:
     main_cycle()
-    time.sleep(10)
+    time.sleep(20)
