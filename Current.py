@@ -14,8 +14,9 @@ image_files = {
     'tor_claim': 'images/tor_claim.png',
     'tor_end': 'images/tor_end.png',
     'tor_next': 'images/tor_next.png',
-    'claim3': 'images/claim3.png',   
-    'claim2': 'images/claim2.png'
+    'claim2': 'images/claim2.png',   
+    'claim3': 'images/claim3.png',
+    'claim4': 'images/claim4.png'
 }
 threshold = 0.85
 
