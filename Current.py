@@ -1,3 +1,7 @@
+#Version 0.0.2
+#13/06/2023
+#RichRadd Bad Programming
+
 import cv2
 import numpy as np
 import pyautogui
