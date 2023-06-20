@@ -7,22 +7,18 @@ import numpy as np
 import pyautogui
 import pygetwindow as gw
 import time
+import os
 
-# Define image filenames and threshold
-image_files = {
-    'retry_game': 'images/retry_game.png',
-    'buy_health': 'images/health_upgrade.png',
-    'ad_gem': 'images/ad_gem.png',
-    'start_game': 'images/start_game.png',
-    'claim1': 'images/claim1.png',
-    'tor_claim': 'images/tor_claim.png',
-    'tor_end': 'images/tor_end.png',
-    'tor_next': 'images/tor_next.png',
-    'claim2': 'images/claim2.png',   
-    'claim3': 'images/claim3.png',
-    'claim4': 'images/claim4.png'
-}
+image_folder = 'images/'  # Path to the folder containing the images
+image_files = {}
 threshold = 0.85
+
+# Iterate over the files in the folder
+for filename in os.listdir(image_folder):
+    if filename.endswith('.png'):  # Filter only PNG files (modify as per your requirements)
+        key = os.path.splitext(filename)[0]  # Use the filename (without extension) as the dictionary key
+        image_path = os.path.join(image_folder, filename)  # Create the full path to the image file
+        image_files[key] = image_path  # Add the key-value pair to the dictionary
 
 # Load target images
 target_images = {}
@@ -51,7 +47,7 @@ def perform_action(x, y, action_name, result_max_val, result_max_loc):
         print(action_name, "\n")
         return
 
-    if action_name == 'buy_health':
+    if action_name == 'health_upgrade':
         click_image_center(target_images[action_name], result_max_loc, x+130, y)
         return
     
