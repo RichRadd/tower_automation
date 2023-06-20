@@ -64,6 +64,8 @@ def main_cycle():
     # Get the Bluestacks window's position and size
     bluestacks = gw.getWindowsWithTitle("Bluestacks")[0]
     x, y, w, h = bluestacks.left, bluestacks.top, bluestacks.width, bluestacks.height
+    if bluestacks.height != 990:
+        print("*** WINDOW WRONG SIZE *** - PLEASE ENSURE THE WINDOW HAS A HEIGHT OF 990 - Use Window Size.py to see window size and adjust\n" * 10)
     
     # Take a screenshot of the window
     screenshot = np.array(pyautogui.screenshot(region=(x, y, w, h)))
