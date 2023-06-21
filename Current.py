@@ -34,7 +34,7 @@ def click_image_center(img, loc, x, y):
     pyautogui.click(clicks=1, interval=1)
 
 def click_defence_icon(x, y):
-    pyautogui.moveTo(x + 520, y + 960, duration=.1)
+    pyautogui.moveTo(x + 200, y + 960, duration=.1)
     pyautogui.click(clicks=1, interval=1)
 
 def perform_action(x, y, action_name, result_max_val, result_max_loc):
