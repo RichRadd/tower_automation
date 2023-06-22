@@ -51,6 +51,10 @@ def perform_action(x, y, action_name, result_max_val, result_max_loc):
         click_image_center(target_images[action_name], result_max_loc, x+130, y)
         return
     
+    if action_name == 'damage_upgrade':
+        click_image_center(target_images[action_name], result_max_loc, x+130, y)
+        return
+    
     if action_name == 'retry_game' or action_name == 'start_game':
         click_image_center(target_images[action_name], result_max_loc, x, y)
         click_defence_icon(x, y)
