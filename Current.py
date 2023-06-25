@@ -37,6 +37,12 @@ def click_defence_icon(x, y):
     pyautogui.moveTo(x + 200, y + 960, duration=.1)
     pyautogui.click(clicks=1, interval=1)
 
+def click_first_perk(x, y):
+    pyautogui.moveTo(x + 270, y + 200, duration=.1)
+    pyautogui.click(clicks=1, interval=1)
+    pyautogui.moveTo(x + 465, y + 108, duration=.1)
+    pyautogui.click(clicks=1, interval=1)
+
 def perform_action(x, y, action_name, result_max_val, result_max_loc):
     if result_max_val < threshold:
         return
@@ -59,6 +65,11 @@ def perform_action(x, y, action_name, result_max_val, result_max_loc):
         click_image_center(target_images[action_name], result_max_loc, x, y)
         click_defence_icon(x, y)
         return
+    
+    if action_name == 'new_perk':
+        click_image_center(target_images[action_name], result_max_loc, x, y)
+        click_first_perk(x,y)
+        return
 
     click_image_center(target_images[action_name], result_max_loc, x, y)
     return
@@ -69,7 +80,7 @@ def main_cycle():
     bluestacks = gw.getWindowsWithTitle("Bluestacks")[0]
     x, y, w, h = bluestacks.left, bluestacks.top, bluestacks.width, bluestacks.height
     if bluestacks.height != 990:
-        print("*** WINDOW WRONG SIZE *** - PLEASE ENSURE THE WINDOW HAS A HEIGHT OF 990 - Use Window Size.py to see window size and adjust\n" * 10)
+        print("*** WINDOW WRONG SIZE *** - PLEASE ENSURE THE WINDOW HAS A HEIGHT OF 990 - Use Window Size.py to see window size and adjust\n" * 3)
     
     # Take a screenshot of the window
     screenshot = np.array(pyautogui.screenshot(region=(x, y, w, h)))
