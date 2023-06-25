@@ -9,6 +9,12 @@ import pygetwindow as gw
 import time
 import os
 
+#### SETTTINGS ####
+#### Make sure the True/False has first letter as Capital letter ####
+defence_build = True
+select_first_perk = True
+#### END SETTINGS ####
+
 image_folder = 'images/'  # Path to the folder containing the images
 image_files = {}
 threshold = 0.85
@@ -63,12 +69,14 @@ def perform_action(x, y, action_name, result_max_val, result_max_loc):
     
     if action_name == 'retry_game' or action_name == 'start_game':
         click_image_center(target_images[action_name], result_max_loc, x, y)
-        click_defence_icon(x, y)
+        if defence_build == True:
+            click_defence_icon(x, y)
         return
     
     if action_name == 'new_perk':
-        click_image_center(target_images[action_name], result_max_loc, x, y)
-        click_first_perk(x,y)
+        if select_first_perk == True:
+            click_image_center(target_images[action_name], result_max_loc, x, y)
+            click_first_perk(x,y)
         return
 
     click_image_center(target_images[action_name], result_max_loc, x, y)
