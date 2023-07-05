@@ -1,5 +1,5 @@
-#Version 0.0.4
-#20/06/2023
+#Version 0.0.6
+#05/07/2023
 #RichRadd Bad Programming
 
 import cv2
@@ -21,10 +21,10 @@ threshold = 0.85
 
 # Iterate over the files in the folder
 for filename in os.listdir(image_folder):
-    if filename.endswith('.png'):  # Filter only PNG files (modify as per your requirements)
-        key = os.path.splitext(filename)[0]  # Use the filename (without extension) as the dictionary key
-        image_path = os.path.join(image_folder, filename)  # Create the full path to the image file
-        image_files[key] = image_path  # Add the key-value pair to the dictionary
+    if filename.endswith('.png'):
+        key = os.path.splitext(filename)[0]
+        image_path = os.path.join(image_folder, filename)
+        image_files[key] = image_path
 
 # Load target images
 target_images = {}
@@ -53,10 +53,11 @@ def perform_action(x, y, action_name, result_max_val, result_max_loc):
     if result_max_val < threshold:
         return
     
-    if action_name == 'claim1' or action_name == 'tor_claim' or action_name == 'tor_end' or action_name == 'tor_next'or action_name == 'claim2':
+    if action_name == 'claim1' or action_name == 'tor_claim' or action_name == 'tor_end' or action_name == 'tor_next' or action_name == 'claim2':
         click_image_center(target_images[action_name], result_max_loc, x, y)
         print("__*** Non regular button pressed ***__" * 1)
         print(action_name, "\n")
+        main_cycle()
         return
 
     if action_name == 'health_upgrade':
@@ -71,6 +72,7 @@ def perform_action(x, y, action_name, result_max_val, result_max_loc):
         click_image_center(target_images[action_name], result_max_loc, x, y)
         if defence_build == True:
             click_defence_icon(x, y)
+        main_cycle()
         return
     
     if action_name == 'new_perk':
