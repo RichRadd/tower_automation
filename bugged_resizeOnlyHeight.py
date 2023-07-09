@@ -1,8 +1,5 @@
 import pygetwindow as gw
 
-def resize_window_height(window, height):
-    window.resizeTo(window.width, height)
-
 def find_and_resize_window(partial_title, height):
     windows = gw.getWindowsWithTitle(partial_title)
 
@@ -13,7 +10,7 @@ def find_and_resize_window(partial_title, height):
     else:
         window = windows[0]
         original_size = (window.width, window.height)
-        resize_window_height(window, height)
+        window.resizeTo(window.width, height)
         resized_size = (window.width, window.height)
 
         if resized_size[1] == height:
