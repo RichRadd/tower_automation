@@ -15,9 +15,9 @@ defence_build = True
 #Short Run Defence
 #perk_choices = ['coins', 'gt', 'gamespeed', 'bosshealthbutspeed', 'maxhealth', 'defenceprecent', 'freeups', 'orbs', 'bounceshot', 'lmd', 'pwr', 'dw', 'damagemulti', 'cfradius', 'randultimate', 'sldamage', 'enemydamtowerdam']
 #Long Run Defence
-perk_choices = ['pwr', 'coins', 'gt', 'gamespeed', 'bosshealthbutspeed', 'freeups', 'defenceprecent', 'maxhealth', 'orbs', 'enemydamtowerdam', 'damagemulti', 'bounceshot', 'cfradius', 'dw', 'lmd', 'sldamage', 'randultimate']
+perk_choices = ['pwr', 'gt', 'coins', 'gamespeed', 'bosshealthbutspeed', 'freeups', 'defenceprecent', 'maxhealth', 'orbs', 'enemydamtowerdam', 'damagemulti', 'bounceshot', 'cfradius', 'dw', 'lmd', 'sldamage', 'randultimate']
 #Long Run Damage
-#perk_choices = ['pwr', 'coins', 'gt', 'gamespeed', 'sldamage', 'freeups', 'enemyspeedbutenemydamage', 'damagemulti', 'bosshealthbutspeed', 'bounceshot', 'cfradius', 'lmd', 'orbs', 'rangebutdamage', 'defenceprecent', 'dw', 'maxhealth', 'randultimate']
+#perk_choices = ['pwr', 'gt', 'coins', 'gamespeed', 'sldamage', 'freeups', 'enemyspeedbutenemydamage', 'damagemulti', 'bosshealthbutspeed', 'bounceshot', 'cfradius', 'lmd', 'orbs', 'rangebutdamage', 'defenceprecent', 'dw', 'maxhealth', 'randultimate']
 #### END SETTINGS ####
 
 # Load images from the "images" folder
@@ -75,25 +75,26 @@ def perks():
     x, y, w, h = bluestacks.left, bluestacks.top, bluestacks.width, bluestacks.height
     screenshot = take_screenshot(x, y, w, h)
 
-    # Look for images in perk_choices
+    # Calculate the top half of the screenshot
+    top_half = screenshot[:h//2, :]
+
+    # Look for images in perk_choices in the top half
     for perk_choice in perk_choices:
         image_path = perk_files.get(perk_choice)
         if image_path:
             target_image = cv2.imread(image_path)
-            result = cv2.matchTemplate(screenshot, target_image, cv2.TM_CCOEFF_NORMED)
+            result = cv2.matchTemplate(top_half, target_image, cv2.TM_CCOEFF_NORMED)
             loc = np.where(result >= threshold)
             if len(loc[0]) > 0 and len(loc[1]) > 0:
                 center_x = int(loc[1][0] + target_image.shape[1] / 2)
                 center_y = int(loc[0][0] + target_image.shape[0] / 2)
                 center = (center_x, center_y)
                 click_image_center(target_image, center, x, y)
-                print("Image Found, continue as normal")
                 pyautogui.click(x + 465, y + 108)
                 return
 
     # No images found, click on x + 465, y + 108 and set perks_enabled to False
     pyautogui.click(x + 465, y + 108)
-    print("Perks Disabled because no image found")
     perks_enabled = False
 
 def perform_action(x, y, action_name, result_max_val, result_max_loc):
@@ -121,7 +122,6 @@ def perform_action(x, y, action_name, result_max_val, result_max_loc):
             click_defence_icon(x, y)
         global perks_enabled
         perks_enabled = True
-        print("Reset perks_enabled")
         main_cycle()
         return
     
