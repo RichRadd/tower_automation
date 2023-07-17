@@ -15,7 +15,7 @@ defence_build = True
 #Short Run Defence
 #perk_choices = ['coins', 'gt', 'gamespeed', 'bosshealthbutspeed', 'maxhealth', 'defenceprecent', 'freeups', 'orbs', 'bounceshot', 'lmd', 'pwr', 'dw', 'damagemulti', 'cfradius', 'randultimate', 'sldamage', 'enemydamtowerdam']
 #Long Run Defence
-perk_choices = ['pwr', 'gt', 'coins', 'gamespeed', 'bosshealthbutspeed', 'freeups', 'defenceprecent', 'maxhealth', 'orbs', 'enemydamtowerdam', 'damagemulti', 'bounceshot', 'cfradius', 'dw', 'lmd', 'sldamage', 'randultimate']
+perk_choices = ['pwr', 'gt', 'coins', 'bh', 'gamespeed', 'bosshealthbutspeed', 'freeups', 'defenceprecent', 'maxhealth', 'orbs', 'enemydamtowerdam', 'damagemulti', 'bounceshot', 'cfradius', 'dw', 'lmd', 'sldamage', 'randultimate']
 #Long Run Damage
 #perk_choices = ['pwr', 'gt', 'coins', 'gamespeed', 'sldamage', 'freeups', 'enemyspeedbutenemydamage', 'damagemulti', 'bosshealthbutspeed', 'bounceshot', 'cfradius', 'lmd', 'orbs', 'rangebutdamage', 'defenceprecent', 'dw', 'maxhealth', 'randultimate']
 #### END SETTINGS ####
@@ -91,10 +91,12 @@ def perks():
                 center = (center_x, center_y)
                 click_image_center(target_image, center, x, y)
                 pyautogui.click(x + 465, y + 108)
+                main_cycle()
                 return
 
     # No images found, click on x + 465, y + 108 and set perks_enabled to False
     pyautogui.click(x + 465, y + 108)
+    print("No Good Perk Choices, require more screenshots & edit in to choice list - Likely interest or otherwise not yet screenshotted")
     perks_enabled = False
 
 def perform_action(x, y, action_name, result_max_val, result_max_loc):
