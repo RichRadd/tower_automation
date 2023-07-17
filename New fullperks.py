@@ -13,9 +13,9 @@ import os
 #### Make sure the True/False has the first letter as a capital letter ####
 defence_build = True
 #Short Run Defence
-perk_choices = ['coins', 'gt', 'gamespeed', 'bosshealthbutspeed', 'maxhealth', 'defenceprecent', 'freeups', 'orbs', 'bounceshot', 'lmd', 'pwr', 'dw', 'damagemulti', 'cfradius', 'randultimate', 'sldamage', 'enemydamtowerdam']
+#perk_choices = ['coins', 'gt', 'gamespeed', 'bosshealthbutspeed', 'maxhealth', 'defenceprecent', 'freeups', 'orbs', 'bounceshot', 'lmd', 'pwr', 'dw', 'damagemulti', 'cfradius', 'randultimate', 'sldamage', 'enemydamtowerdam']
 #Long Run Defence
-#perk_choices = ['pwr', 'coins', 'gt', 'gamespeed', 'bosshealthbutspeed', 'freeups', 'defenceprecent', 'maxhealth', 'orbs', 'enemydamtowerdam', 'damagemulti', 'bounceshot', 'cfradius', 'dw', 'lmd', 'sldamage', 'randultimate']
+perk_choices = ['pwr', 'coins', 'gt', 'gamespeed', 'bosshealthbutspeed', 'freeups', 'defenceprecent', 'maxhealth', 'orbs', 'enemydamtowerdam', 'damagemulti', 'bounceshot', 'cfradius', 'dw', 'lmd', 'sldamage', 'randultimate']
 #Long Run Damage
 #perk_choices = ['pwr', 'coins', 'gt', 'gamespeed', 'sldamage', 'freeups', 'enemyspeedbutenemydamage', 'damagemulti', 'bosshealthbutspeed', 'bounceshot', 'cfradius', 'lmd', 'orbs', 'rangebutdamage', 'defenceprecent', 'dw', 'maxhealth', 'randultimate']
 #### END SETTINGS ####
