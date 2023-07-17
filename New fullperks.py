@@ -87,13 +87,13 @@ def perks():
                 center_y = int(loc[0][0] + target_image.shape[0] / 2)
                 center = (center_x, center_y)
                 click_image_center(target_image, center, x, y)
-                print("Image Found")
+                print("Image Found, continue as normal")
                 pyautogui.click(x + 465, y + 108)
                 return
 
     # No images found, click on x + 465, y + 108 and set perks_enabled to False
     pyautogui.click(x + 465, y + 108)
-    print("No Image Found")
+    print("Perks Disabled because no image found")
     perks_enabled = False
 
 def perform_action(x, y, action_name, result_max_val, result_max_loc):
@@ -121,6 +121,7 @@ def perform_action(x, y, action_name, result_max_val, result_max_loc):
             click_defence_icon(x, y)
         global perks_enabled
         perks_enabled = True
+        print("Reset perks_enabled")
         main_cycle()
         return
     
