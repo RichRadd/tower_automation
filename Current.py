@@ -70,6 +70,7 @@ def click_defence_icon(x, y):
     pyautogui.click(clicks=1, interval=1)
 
 def perks():
+    time.sleep(0.1)
     global perks_enabled
 
     # Take a new screenshot
@@ -91,8 +92,11 @@ def perks():
                 center_x = int(loc[1][0] + target_image.shape[1] / 2)
                 center_y = int(loc[0][0] + target_image.shape[0] / 2)
                 center = (center_x, center_y)
+                time.sleep(0.1)
                 click_image_center(target_image, center, x, y)
-                pyautogui.click(x + 465, y + 108)
+                pyautogui.moveTo(x + 465, y + 108, duration=.1)
+                time.sleep(0.1)
+                pyautogui.click(clicks=1, interval=1)
                 main_cycle()
                 return
 
