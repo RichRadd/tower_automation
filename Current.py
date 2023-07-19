@@ -1,5 +1,5 @@
-#Version 0.0.6
-#05/07/2023
+#Version 0.1.1
+#19/07/2023
 #RichRadd Bad Programming
 
 import cv2
@@ -9,27 +9,53 @@ import pygetwindow as gw
 import time
 import os
 
-#### SETTTINGS ####
-#### Make sure the True/False has first letter as Capital letter ####
+#### SETTINGS ####
+#### Make sure the True/False has the first letter as a capital letter ####
 defence_build = True
-select_first_perk = True
+#Short Run Defence
+#perk_choices = ['coins', 'gt', 'gamespeed', 'bosshealthbutspeed', 'maxhealth', 'defenceprecent', 'freeups', 'orbs', 'bounceshot', 'lmd', 'pwr', 'dw', 'damagemulti', 'cfradius', 'randultimate', 'sldamage', 'enemydamtowerdam','healthregen','interest']
+
+#Long Run Defence
+perk_choices = ['pwr', 'gt', 'coins', 'bh', 'gamespeed', 'bosshealthbutspeed', 'freeups', 'defenceprecent', 'maxhealth', 'orbs', 'enemydamtowerdam', 'damagemulti', 'bounceshot', 'cfradius', 'dw', 'lmd', 'sldamage', 'randultimate','healthregen','interest']
+
+#Long Run Damage
+#perk_choices = ['pwr', 'gt', 'coins', 'gamespeed', 'sldamage', 'orbs', 'freeups', 'enemyspeedbutenemydamage', 'damagemulti', 'bosshealthbutspeed', 'rangebutdamage', 'bounceshot', 'cfradius', 'lmd', 'defenceprecent', 'dw', 'maxhealth', 'randultimate','healthregen','interest']
 #### END SETTINGS ####
 
-image_folder = 'images/'  # Path to the folder containing the images
+# Load images from the "images" folder
+image_folder = 'images/'
 image_files = {}
 threshold = 0.85
 
-# Iterate over the files in the folder
+# Iterate over the files in the "images" folder
 for filename in os.listdir(image_folder):
     if filename.endswith('.png'):
         key = os.path.splitext(filename)[0]
         image_path = os.path.join(image_folder, filename)
         image_files[key] = image_path
 
-# Load target images
+# Load target images from the "images" folder
 target_images = {}
 for name, filename in image_files.items():
     target_images[name] = cv2.imread(filename)
+
+# Load images from the "perkimages" folder
+perk_folder = 'perkimages/'
+perk_files = {}
+
+# Iterate over the files in the "perkimages" folder
+for filename in os.listdir(perk_folder):
+    if filename.endswith('.png'):
+        key = os.path.splitext(filename)[0]
+        image_path = os.path.join(perk_folder, filename)
+        perk_files[key] = image_path
+
+# Load target images from the "perkimages" folder
+perk_images = {}
+for name, filename in perk_files.items():
+    perk_images[name] = cv2.imread(filename)
+
+perks_enabled = True
 
 # Define functions for each action
 def click_image_center(img, loc, x, y):
@@ -43,11 +69,37 @@ def click_defence_icon(x, y):
     pyautogui.moveTo(x + 200, y + 960, duration=.1)
     pyautogui.click(clicks=1, interval=1)
 
-def click_first_perk(x, y):
-    pyautogui.moveTo(x + 270, y + 200, duration=.1)
-    pyautogui.click(clicks=1, interval=1)
-    pyautogui.moveTo(x + 465, y + 108, duration=.1)
-    pyautogui.click(clicks=1, interval=1)
+def perks():
+    global perks_enabled
+
+    # Take a new screenshot
+    bluestacks = gw.getWindowsWithTitle("Bluestacks")[0]
+    x, y, w, h = bluestacks.left, bluestacks.top, bluestacks.width, bluestacks.height
+    screenshot = take_screenshot(x, y, w, h)
+
+    # Calculate the top half of the screenshot
+    top_half = screenshot[:h//2, :]
+
+    # Look for images in perk_choices in the top half
+    for perk_choice in perk_choices:
+        image_path = perk_files.get(perk_choice)
+        if image_path:
+            target_image = cv2.imread(image_path)
+            result = cv2.matchTemplate(top_half, target_image, cv2.TM_CCOEFF_NORMED)
+            loc = np.where(result >= threshold)
+            if len(loc[0]) > 0 and len(loc[1]) > 0:
+                center_x = int(loc[1][0] + target_image.shape[1] / 2)
+                center_y = int(loc[0][0] + target_image.shape[0] / 2)
+                center = (center_x, center_y)
+                click_image_center(target_image, center, x, y)
+                pyautogui.click(x + 465, y + 108)
+                main_cycle()
+                return
+
+    # No images found, click on x + 465, y + 108 and set perks_enabled to False
+    pyautogui.click(x + 465, y + 108)
+    print("No Good Perk Choices, require more screenshots & edit in to choice list - Likely interest or otherwise not yet screenshotted")
+    perks_enabled = False
 
 def perform_action(x, y, action_name, result_max_val, result_max_loc):
     if result_max_val < threshold:
@@ -72,17 +124,25 @@ def perform_action(x, y, action_name, result_max_val, result_max_loc):
         click_image_center(target_images[action_name], result_max_loc, x, y)
         if defence_build == True:
             click_defence_icon(x, y)
+        global perks_enabled
+        perks_enabled = True
         main_cycle()
         return
     
     if action_name == 'new_perk':
-        if select_first_perk == True:
+        if perks_enabled == True:
             click_image_center(target_images[action_name], result_max_loc, x, y)
-            click_first_perk(x,y)
+            perks()
         return
 
     click_image_center(target_images[action_name], result_max_loc, x, y)
     return
+
+# Function to take a screenshot of the window
+def take_screenshot(x, y, w, h):
+    screenshot = np.array(pyautogui.screenshot(region=(x, y, w, h)))
+    screenshot_rgb = cv2.cvtColor(screenshot, cv2.COLOR_RGB2BGR)
+    return screenshot_rgb
 
 # Define the main loop
 def main_cycle():
@@ -93,13 +153,12 @@ def main_cycle():
         print("*** WINDOW WRONG SIZE *** - PLEASE ENSURE THE WINDOW HAS A HEIGHT OF 990 - Use Window Size.py to see window size and adjust\n" * 3)
     
     # Take a screenshot of the window
-    screenshot = np.array(pyautogui.screenshot(region=(x, y, w, h)))
-    screenshot_rgb = cv2.cvtColor(screenshot, cv2.COLOR_RGB2BGR)
+    screenshot = take_screenshot(x, y, w, h)
 
     # Perform template matching to find the target images
     results = {}
     for name, target_image in target_images.items():
-        results[name] = cv2.matchTemplate(screenshot_rgb, target_image, cv2.TM_CCOEFF_NORMED)
+        results[name] = cv2.matchTemplate(screenshot, target_image, cv2.TM_CCOEFF_NORMED)
 
     # Get the positions of the best matches and perform the corresponding action
     for name, result in results.items():
