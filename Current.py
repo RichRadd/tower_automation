@@ -16,10 +16,10 @@ defence_build = True
 #perk_choices = ['coins', 'gt', 'gamespeed', 'bosshealthbutspeed', 'maxhealth', 'defenceprecent', 'freeups', 'orbs', 'bounceshot', 'lmd', 'pwr', 'dw', 'damagemulti', 'cfradius', 'randultimate', 'sldamage', 'enemydamtowerdam','healthregen','interest']
 
 #Long Run Defence
-perk_choices = ['pwr', 'gt', 'coins', 'bh', 'gamespeed', 'bosshealthbutspeed', 'freeups', 'defenceprecent', 'maxhealth', 'orbs', 'enemydamtowerdam', 'damagemulti', 'bounceshot', 'cfradius', 'dw', 'lmd', 'sldamage', 'randultimate','healthregen','interest']
+perk_choices = ['enemydamtowerdam', 'bh', 'gt', 'pwr', 'coins', 'gamespeed', 'bosshealthbutspeed', 'freeups', 'defenceprecent', 'maxhealth', 'orbs', 'damagemulti', 'bounceshot', 'cfradius', 'dw', 'lmd', 'sldamage', 'randultimate', 'healthregen', 'interest']
 
 #Long Run Damage
-#perk_choices = ['pwr', 'gt', 'coins', 'gamespeed', 'sldamage', 'orbs', 'freeups', 'enemyspeedbutenemydamage', 'damagemulti', 'bosshealthbutspeed', 'rangebutdamage', 'bounceshot', 'cfradius', 'lmd', 'defenceprecent', 'dw', 'maxhealth', 'randultimate','healthregen','interest']
+#perk_choices = ['pwr', 'gt', 'coins', 'gamespeed', 'sldamage', 'orbs', 'freeups', 'enemyspeedbutenemydamage', 'damagemulti', 'bosshealthbutspeed', 'enemyrangebutdamage', 'bounceshot', 'cfradius', 'lmd', 'defenceprecent', 'dw', 'maxhealth', 'randultimate','healthregen','interest']
 #### END SETTINGS ####
 
 # Load images from the "images" folder
