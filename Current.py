@@ -1,5 +1,5 @@
-#Version 0.1.1
-#19/07/2023
+#Version 0.1.1.1
+#11/08/23
 #RichRadd Bad Programming
 
 import cv2
@@ -16,7 +16,7 @@ defence_build = True
 #perk_choices = ['coins', 'gt', 'gamespeed', 'bosshealthbutspeed', 'maxhealth', 'defenceprecent', 'freeups', 'orbs', 'bounceshot', 'lmd', 'pwr', 'dw', 'damagemulti', 'cfradius', 'randultimate', 'sldamage', 'enemydamtowerdam','healthregen','interest']
 
 #Long Run Defence
-perk_choices = ['enemydamtowerdam', 'bh', 'gt', 'pwr', 'coins', 'gamespeed', 'bosshealthbutspeed', 'freeups', 'defenceprecent', 'maxhealth', 'orbs', 'damagemulti', 'bounceshot', 'cfradius', 'dw', 'lmd', 'sldamage', 'randultimate', 'healthregen', 'interest']
+perk_choices = ['coinsbuthealth', 'pwr', 'gt', 'bh', 'coins', 'enemydamtowerdam', 'gamespeed', 'defenceprecent', 'maxhealth', 'freeups', 'orbs', 'sldamage', 'damagemulti', 'bounceshot', 'cfradius', 'towerdamagebutbosshealth', 'dw', 'lmd', 'randultimate', 'healthregen', 'interest', 'bosshealthbutspeed', '12xcashnocash', 'enemyhealthbutlifesteal']
 
 #Long Run Damage
 #perk_choices = ['pwr', 'gt', 'coins', 'gamespeed', 'sldamage', 'orbs', 'freeups', 'enemyspeedbutenemydamage', 'damagemulti', 'bosshealthbutspeed', 'enemyrangebutdamage', 'bounceshot', 'cfradius', 'lmd', 'defenceprecent', 'dw', 'maxhealth', 'randultimate','healthregen','interest']
