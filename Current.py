@@ -1,4 +1,4 @@
-#Version 0.1.1.1
+#Version 0.1.1.2
 #11/08/23
 #RichRadd Bad Programming
 
@@ -11,16 +11,9 @@ import os
 
 #### SETTINGS ####
 #### Make sure the True/False has the first letter as a capital letter ####
-defence_build = True
-#Short Run Defence
-#perk_choices = ['coins', 'gt', 'gamespeed', 'bosshealthbutspeed', 'maxhealth', 'defenceprecent', 'freeups', 'orbs', 'bounceshot', 'lmd', 'pwr', 'dw', 'damagemulti', 'cfradius', 'randultimate', 'sldamage', 'enemydamtowerdam','healthregen','interest']
-
-#Long Run Defence
-perk_choices = ['coinsbuthealth', 'pwr', 'gt', 'bh', 'coins', 'enemydamtowerdam', 'gamespeed', 'defenceprecent', 'maxhealth', 'freeups', 'orbs', 'sldamage', 'damagemulti', 'bounceshot', 'cfradius', 'towerdamagebutbosshealth', 'dw', 'lmd', 'randultimate', 'healthregen', 'interest', 'bosshealthbutspeed', '12xcashnocash', 'enemyhealthbutlifesteal']
-
-#Long Run Damage
-#perk_choices = ['pwr', 'gt', 'coins', 'gamespeed', 'sldamage', 'orbs', 'freeups', 'enemyspeedbutenemydamage', 'damagemulti', 'bosshealthbutspeed', 'enemyrangebutdamage', 'bounceshot', 'cfradius', 'lmd', 'defenceprecent', 'dw', 'maxhealth', 'randultimate','healthregen','interest']
-#### END SETTINGS ####
+defence_build = False
+perks_enabled = True
+perk_choices = ['coinsbuthealth', 'pwr', 'randultimate', 'gt', 'bh', 'coins', 'sldamage', 'enemyhealthbutlifesteal', 'damagemulti', 'gamespeed', 'orbs', 'bounceshot', 'enemyspeedbutenemydamage', 'enemyrangebutdamage', 'sm', 'lmd', 'dw', 'defenceprecent', 'maxhealth', 'healthregen', 'freeups', 'interest', '12xcashnocash', 'regenbutmaxhealth', 'defencepercent', 'cfradius', 'ps','cl']
 
 # Load images from the "images" folder
 image_folder = 'images/'
@@ -55,8 +48,6 @@ perk_images = {}
 for name, filename in perk_files.items():
     perk_images[name] = cv2.imread(filename)
 
-perks_enabled = True
-
 # Define functions for each action
 def click_image_center(img, loc, x, y):
     h, w = img.shape[::-1][:2]
@@ -79,7 +70,7 @@ def perks():
     screenshot = take_screenshot(x, y, w, h)
 
     # Calculate the top half of the screenshot
-    top_half = screenshot[:h//2, :]
+    top_half = screenshot[:556, :]
 
     # Look for images in perk_choices in the top half
     for perk_choice in perk_choices:
@@ -115,14 +106,10 @@ def perform_action(x, y, action_name, result_max_val, result_max_loc):
         main_cycle()
         return
 
-    if action_name == 'health_upgrade':
+    if action_name == 'health_upgrade' or action_name == 'damage_upgrade':
         click_image_center(target_images[action_name], result_max_loc, x+130, y)
         return
-    
-    if action_name == 'damage_upgrade':
-        click_image_center(target_images[action_name], result_max_loc, x+130, y)
-        return
-    
+
     if action_name == 'retry_game' or action_name == 'start_game':
         click_image_center(target_images[action_name], result_max_loc, x, y)
         if defence_build == True:
