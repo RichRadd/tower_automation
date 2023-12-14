@@ -13,7 +13,8 @@ import os
 #### Make sure the True/False has the first letter as a capital letter ####
 defence_build = False
 perks_enabled = True
-perk_choices = ['coinsbuthealth', 'pwr', 'randultimate', 'gt', 'bh', 'coins', 'sldamage', 'enemyhealthbutlifesteal', 'damagemulti', 'gamespeed', 'orbs', 'bounceshot', 'enemyspeedbutenemydamage', 'enemyrangebutdamage', 'sm', 'lmd', 'dw', 'defenceprecent', 'maxhealth', 'healthregen', 'freeups', 'interest', '12xcashnocash', 'regenbutmaxhealth', 'defencepercent', 'cfradius', 'ps','cl']
+perk_choices = ['coinsbuthealth', 'pwr', 'gt', 'bh', 'randultimate', 'coins', 'sldamage', 'enemyhealthbutlifesteal', 'damagemulti', 'gamespeed', 'orbs', 'bounceshot', 'enemyspeedbutenemydamage', 'enemyrangebutdamage', 'lm', 'sm', 'lmd', 'dw', 'defenceprecent', 'maxhealth', 'healthregen', 'freeups', 'interest', '12xcashnocash', 'regenbutmaxhealth', 'defencepercent', 'cfradius', 'ps','cl']
+game_counter = 0
 
 # Load images from the "images" folder
 image_folder = 'images/'
@@ -70,7 +71,7 @@ def perks():
     screenshot = take_screenshot(x, y, w, h)
 
     # Calculate the top half of the screenshot
-    top_half = screenshot[:556, :]
+    top_half = screenshot[:624, :]
 
     # Look for images in perk_choices in the top half
     for perk_choice in perk_choices:
@@ -92,7 +93,6 @@ def perks():
 
     # No images found, click on x + 465, y + 108 and set perks_enabled to False
     pyautogui.click(x + 465, y + 108)
-    print("No Good Perk Choices, require more screenshots & edit in to choice list - Likely interest or otherwise not yet screenshotted")
     perks_enabled = False
 
 def perform_action(x, y, action_name, result_max_val, result_max_loc):
@@ -116,6 +116,9 @@ def perform_action(x, y, action_name, result_max_val, result_max_loc):
             click_defence_icon(x, y)
         global perks_enabled
         perks_enabled = True
+        global game_counter
+        game_counter += 1
+        print("Game Counter:", game_counter)
         main_cycle()
         return
     
